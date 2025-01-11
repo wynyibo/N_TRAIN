@@ -1,3 +1,4 @@
+//流量异常检测结构体
 #ifndef COMMON_H
 #define COMMON_H
 
@@ -10,16 +11,16 @@ struct flow_attribute
     s64 dst_port;          // Destination port
     s64 header_length;     // TCP total header length
 
-    s64 last_packet_time;
-    s64 status;
-    u64 total_feature_extraction_time;
-    u64 detection_start_time;
+    s64 last_packet_time; //记录流中 最后一个数据包的时间戳
+    s64 status;  //状态：正常 or 异常
+    u64 total_feature_extraction_time;  //提取特征所用总时间
+    u64 detection_start_time;   //流量检测的开始时间
 
-    s32 nn_idx;
-    s32 hidden1[32];
+    s32 nn_idx;   //神经网络索引值
+    s32 hidden1[32];  //神经网络隐层的输出值，用于分类
     s32 hidden2[32];
 };
-
+//标识一个流
 struct flow
 {
     int saddr;
