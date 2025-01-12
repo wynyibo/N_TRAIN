@@ -13,6 +13,7 @@
 static inline void linear_layer(const int32_t *W, const int32_t *x, int32_t *y, const int32_t M, const int32_t N)
 {
     int64_t sum;//存储每个输出的加权和
+    //Clang编译器的预处理指令，展开循环的所有迭代，提高代码性能，最佳适用场景：针对迭代次数少且迭代次数在编译时已知的循环，完全展开循环可以更有效利用计算资源
     #pragma clang loop unroll(full) 
     //W是一个M * N的矩阵,对于每个输出元素 y[i]，计算该元素与输入向量 x 的加权和，即 y[i] = sum(W[i, :] * x)。
     for (int32_t i = 0; i < M; ++i) //遍历输出层的每一行（每个神经元）
